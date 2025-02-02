@@ -4,60 +4,62 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>图片密码验证</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樱花按钮验证</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
-        }
-        
-        img {
-            width: 300px;
-            height: auto;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://images.unsplash.com/photo-1542824168-0c2d6b0b809d');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        button {
-            padding: 12px 24px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
+        .sakura-btn {
+            padding: 20px 40px;
+            font-size: 24px;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
+            background-color: #FFB3C1;
+            color: white;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        button:hover {
-            background-color: #45a049;
+        .sakura-btn:hover {
+            background-color: #FF8FA3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
 <body>
-    <img src="https://placekitten.com/300/200" alt="示例图片">
-    <button onclick="checkPassword()">点击验证</button>
+    <button class="sakura-btn" onclick="checkPassword()">点击进入</button>
 
     <script>
         function checkPassword() {
-            // 设置正确密码（此处仅为示例，实际应用中应使用更安全的验证方式）
+            // 设置预设密码（实际使用中建议使用更安全的验证方式）
             const correctPassword = "123456";
             
             // 弹出密码输入框
-            const inputPassword = prompt("请输入访问密码：");
+            const userInput = prompt("请输入访问密码：");
             
-            if (inputPassword === correctPassword) {
+            if (userInput === correctPassword) {
                 // 密码正确时跳转
                 window.location.href = "https://www.baidu.com";
-            } else if (inputPassword !== null) {
+            } else if (userInput === null) {
+                // 用户取消输入
+                return;
+            } else {
                 // 密码错误提示
                 alert("密码错误，请重试！");
+                checkPassword(); // 重新调用验证函数
             }
         }
     </script>
