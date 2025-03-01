@@ -1,67 +1,141 @@
 <!--<h1>https://github.moeyy.xyz/https://github.com/luongz/iptv-jp/blob/main/jp.m3u</h1>-->
-<!--<h1>http://192.168.1.1:5244/d/IPTV/</h1>-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>樱花按钮验证</title>
+    <title>简约导航页</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('https://images.unsplash.com/photo-1542824168-0c2d6b0b809d');
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('你的背景图片地址.jpg'); /* 修改此处替换背景图片 */
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .sakura-btn {
-            padding: 20px 40px;
-            font-size: 24px;
+        .container {
+            margin-top: 20vh;
+            text-align: center;
+        }
+
+        #time {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 5em;
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+            margin: 0 auto 40px;
+        }
+
+        #search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        #search-input {
+            flex: 1;
             border: none;
-            border-radius: 30px;
-            background-color: #FFB3C1;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: transparent;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            outline: none;
         }
 
-        .sakura-btn:hover {
-            background-color: #FF8FA3;
+        .links-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .link:hover {
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            #time {
+                font-size: 3em;
+            }
+            
+            .search-box {
+                width: 90%;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <button class="sakura-btn" onclick="checkPassword()">点击进入</button>
+    <div class="container">
+        <div id="time">00:00:00</div>
+        
+        <div class="search-box">
+            <form id="search-form" action="https://www.bing.com/search" method="get" target="_blank">
+                <input type="search" id="search-input" name="q" placeholder="输入搜索内容..." autofocus>
+            </form>
+        </div>
+
+        <div class="links-container">
+            <!-- 在此处添加自定义链接 -->
+            <a href="https://example.com" class="link">示例网站1</a>
+            <a href="https://example.com" class="link">示例网站2</a>
+            <a href="https://example.com" class="link">示例网站3</a>
+        </div>
+    </div>
 
     <script>
-        function checkPassword() {
-            // 设置预设密码（实际使用中建议使用更安全的验证方式）
-            const correctPassword = "123456";
-            
-            // 弹出密码输入框
-            const userInput = prompt("请输入访问密码：");
-            
-            if (userInput === correctPassword) {
-                // 密码正确时跳转
-                window.location.href = "https://www.baidu.com";
-            } else if (userInput === null) {
-                // 用户取消输入
-                return;
-            } else {
-                // 密码错误提示
-                alert("密码错误，请重试！");
-                checkPassword(); // 重新调用验证函数
-            }
+        // 更新时间显示
+        function updateTime() {
+            const options = { 
+                hour12: false,
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+            document.getElementById('time').textContent = 
+                new Date().toLocaleTimeString('zh-CN', options);
         }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // 搜索框回车提交
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                this.form.submit();
+            }
+        });
     </script>
 </body>
 </html>
